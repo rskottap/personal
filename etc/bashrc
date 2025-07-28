@@ -1,3 +1,7 @@
+# My personal bashrc
+
+export PERSONAL="$(readlink -f "${BASH_SOURCE[0]}" | xargs dirname | xargs dirname)"
+export PATH="${PERSONAL}/bin:${PATH}"
 
 if [ "$EUID" == 0 ]; then
     export DESKTOP="/home/ramya/Desktop"
@@ -10,14 +14,12 @@ export SCREENSHOTS="${DESKTOP}/screenshots"
 export DROPBOX="${DESKTOP}/Dropbox"
 
 
-export HOWTO="$HOME/howto" #TODO
+export HOWTO="${PERSONAL}/share/howto"
+export PATH="$HOWTO:$PATH"
 
 if [ -e '/usr/local/cuda' ]; then export CUDA_HOME="/usr/local/cuda"; else export CUDA_HOME="/opt/cuda/"; fi
 export PATH="$PATH:$CUDA_HOME/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"
-
-#TODO
-export PATH="$REPOS/dotfiles/howto:$PATH"
 
 
 #### ibus
@@ -32,11 +34,9 @@ dirs+=(
     [obsidian]="$OBSIDIAN"
     [ss]="$SCREENSHOTS"
     [dropbox]="$DROPBOX"
-    [dotfiles]="$REPOS/dotfiles" #TODO
     [howto]="$HOWTO"
     [imfind]="$REPOS/imfind"
     [airoot]="$REPOS/airoot"
-    [exec]="$REPOS/exec" #TODO
     [nixos]="$REPOS/nixos"
 )
 
