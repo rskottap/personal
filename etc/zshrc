@@ -1,0 +1,58 @@
+alias python='python3'
+export PYTHON='python3'
+source ~/.bashrc
+
+#######################       zsh fixes       #######################
+
+### Aliases
+#unalias ls
+alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
+
+
+###################### Utils & Bash completion ######################
+
+if [ "$OSTYPE" != linux-gnu ]; then  # Is this the macOS system?
+
+    ### to get ls, dir and other utils with their original names but using the brew install coreutils ones
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+    ### Enable bash-completion
+    if [ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+        . $(brew --prefix)/etc/profile.d/bash_completion.sh
+    fi
+
+#TODO
+    comppath=$(brew --prefix)/etc/bash_completion.d/
+    if [[ ! -e ${comppath}/my_completion.sh && -e $HOME/dotfiles ]]; then
+        ln -s $HOME/dotfiles/bash_completions/* ${comppath}
+    fi
+fi
+
+
+######################  Bitches love colours  #######################
+
+if [ "$OSTYPE" != linux-gnu ]; then  # Is this the macOS system?
+    # text background colours
+    # https://michurin.github.io/xterm256-color-picker/
+    CWD_THEME_PROMPT_COLOR="171"
+    USER_INFO_THEME_PROMPT_COLOR="128"
+    LAST_STATUS_THEME_PROMPT_COLOR="160"
+
+
+    # Enable Powerlevel9k instant prompt. Should stay close to the top of ~/.zshrc.
+    # Initialization code that may require console input (password prompts, [y/n]
+    # confirmations, etc.) must go above this block; everything else may go below.
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p9k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p9k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
+
+    source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
+
+    source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
