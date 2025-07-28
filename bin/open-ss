@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nemo $(dconf read /org/gnome/gnome-screenshot/auto-save-directory | sed "s/'//g")
+

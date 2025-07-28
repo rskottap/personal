@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Try system-wide Obsidian first
+if command -v obsidian >/dev/null 2>&1; then
+  exec obsidian
+fi
+
+# Fall back to AppImage in $DESKTOP
+APPIMAGE=$(find "$DESKTOP" -maxdepth 1 -type f -name 'Obsidian-*' -print | head -n 1)
+
+if [ -n "$APPIMAGE" ] && [ -f "$APPIMAGE" ]; then
+  chmod +x "$APPIMAGE" 2>/dev/null
+  exec "$APPIMAGE"
+else
+  echo "Obsidian not found." >&2
+  exit 1
+fi

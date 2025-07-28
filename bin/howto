@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Function to open a file in vim in normal mode
+open_in_vim() {
+  local file="$1"
+  vim -N "$file"
+}
+
+# Check if a file argument is provided
+if [ "$1" == "-c" ]; then
+  shift
+  if [ -z "$1" ]; then
+    echo "Usage: howto -c <file>"
+    exit 1
+  fi
+  FILE="$HOWTO_DIR/$1"
+  
+  # Create the file if it doesn't exist, or open if it does
+  if [ ! -f "$FILE" ]; then
+    touch "$FILE"
+  fi
+  open_in_vim "$FILE"
+  
+else
+  if [ -z "$1" ]; then
+    echo "Usage: howto [-c] <file>"
+    echo "-c create mode"
+    exit 1
+  fi
+  FILE="$HOWTO_DIR/$1"
+  
+  # Open the file if it exists
+  if [ -f "$FILE" ]; then
+    open_in_vim "$FILE"
+  fi
+fi
+

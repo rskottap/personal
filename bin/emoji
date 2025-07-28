@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+# Dictionary of emojis
+declare -A emojis=(
+    ["fire"]="🔥"
+    ["100"]="💯"
+    ["sunglasses"]="🕶️"
+    ["peace"]="✌️"
+    ["thumbs-up"]="👍"
+    ["red_heart"]="❤️"
+    ["purple_heart"]="💜"
+    ["home"]="🏡"
+    ["sparkle"]="✨"
+    ["bunny"]="🐰"
+    ["puppy"]="🐶"
+    ["kitty"]="😺"
+    ["moon"]="🌙"
+    ["check"]="✅"
+    ["x"]="❌"
+    ["facepalm"]="🤦"
+    ["cry"]="😭"
+    ["cry_laugh"]="😂"
+    ["warning"]="⚠️"
+    ["exclamation"]="❗"
+    ["party"]="🎉"
+    ["notes"]="📝"
+    ["star"]="⭐"
+    ["question"]="❓"
+)
+
+usage() {
+    # We can optionally pass in an explanation of what went wrong.
+    [[ -n "$1" ]] && log "${1}"
+    cat << EOF
+USAGE
+    $(basename $0) [OPTIONS]
+
+OPTIONS
+    --list, -l      List all emojis
+    --help, -h      Show this help
+
+EMOJIS:
+$(print_all_emojis)
+EOF
+    exit 1
+}
+
+emoji_is_available() {
+    echo ${!emojis[*]} | sed -z -r 's@ @\n@g' | grep -cq "^${1}$"
+}
+
+# For automatically adding new keys to our tab-completion
+list_all_emojis() {
+    echo ${!emojis[*]}
+    exit 0
+}
+
+print_all_emojis() {
+    for name in "${!emojis[@]}"; do
+        printf "  %-15s %s\n" "$name" "${emojis[$name]}"
+    done
+}
+
+show_emoji () {
+    local key="${1}"
+    local emoji="${emojis[$key]}"
+
+    if ! emoji_is_available "$key"; then
+        die "Thing $key not in list of available emojis."
+    fi
+
+    echo "${emoji}"
+    echo "${emoji}" | xc
+
+    exit 0
+}
+
+[[ -z "$1" ]] && usage
+
+while [[ -n "$1" ]]; do
+    case "$1" in
+        -h|--help)          usage;;
+        -l|--list)          list_all_emojis;;
+	-p|--print)         print_all_emojis;;
+        -*)                 usage "Unrecognized option: ${1}";;
+        *)                  show_emoji "${1}";;
+    esac
+    shift
+done
+
