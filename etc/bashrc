@@ -1,0 +1,57 @@
+
+if [ "$EUID" == 0 ]; then
+    export DESKTOP="/home/ramya/Desktop"
+fi
+
+### environment
+export REPOS="${DESKTOP}/repos"
+export OBSIDIAN="${DESKTOP}/obsidian"
+export SCREENSHOTS="${DESKTOP}/screenshots"
+export DROPBOX="${DESKTOP}/Dropbox"
+
+
+export HOWTO="$HOME/howto" #TODO
+
+if [ -e '/usr/local/cuda' ]; then export CUDA_HOME="/usr/local/cuda"; else export CUDA_HOME="/opt/cuda/"; fi
+export PATH="$PATH:$CUDA_HOME/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"
+
+#TODO
+export PATH="$REPOS/dotfiles/howto:$PATH"
+
+
+#### ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+
+
+### my private dirs
+dirs+=(
+    [repos]="$REPOS"
+    [obsidian]="$OBSIDIAN"
+    [ss]="$SCREENSHOTS"
+    [dropbox]="$DROPBOX"
+    [dotfiles]="$REPOS/dotfiles" #TODO
+    [howto]="$HOWTO"
+    [imfind]="$REPOS/imfind"
+    [airoot]="$REPOS/airoot"
+    [exec]="$REPOS/exec" #TODO
+    [nixos]="$REPOS/nixos"
+)
+
+### aliases
+alias yta='yt-dlp --extract-audio'
+alias yt='yt-dlp'
+
+alias ipyembed='echo "__import__(\"IPython\").embed()" | xc'
+alias pca='pre-commit run --all-files'
+
+alias use_llava='export IMFIND_USE_LLAVA="True"'
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/ramya/.lmstudio/bin"
+
+# For lean
+export PATH="$HOME/.elan/bin:$PATH"
+
