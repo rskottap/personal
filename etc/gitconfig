@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = master
+[user]
+	email = rskottap@gmail.com
+	name = Ramya Kottapalli
+[push]
+	autosetupremote = true
+[pull]
+	rebase = true
