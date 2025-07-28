@@ -37,7 +37,9 @@ dirs+=(
     [howto]="$HOWTO"
     [imfind]="$REPOS/imfind"
     [airoot]="$REPOS/airoot"
+    [shortcuts]="$REPOS/shortcuts"
     [nixos]="$REPOS/nixos"
+    [personal]="${PERSONAL}"
 )
 
 ### aliases
