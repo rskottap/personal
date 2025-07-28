@@ -1,0 +1,78 @@
+# Basic git commands
+
+### Basic gh setup
+gh auth login
+gh repo clone <repo>
+gh repo list <org> #thedynamiclinker
+
+#### Initialize empty git repo
+git init
+
+#### Initialize empty bare repo
+A bare repository has no working directory, and its sole purpose is to act as the Git repository itself.
+
+git init --bare <path/to/repo>
+
+#### Create new GitHub repo
+gh repo create <repo name> --private --source=<path/to/repo>
+
+#### Add remote origin
+git remote add origin git@github.com:rskottap/<repo name>.git
+
+### Git reverting
+#### unstage files
+git reset <file>
+git restore --staged <file>
+
+#### update all origin/<branch> refs to latest
+git fetch --all
+
+#### Jump to the latest commit on origin/main and checkout those files
+git reset --hard origin/master
+
+git reset --hard HEAD~2
+git push --force
+
+#### Dangling commits
+git fsck --lost-found
+git show <dangling_commit_sha>
+
+### Remove untracked files
+#### Print out the list of files and directories which will be removed (dry run)
+git clean -n -d
+
+#### Delete the files from the repository
+git clean -f
+
+### Config
+git config list
+git config --global --list
+
+#### Setup upstream remote branch automatically
+git config set --global push.autosetupremote true
+
+### Edits
+gh repo edit
+gh repo edit rskottap/<repo-name> -d <string>
+git commit --amend # to change commit message before pushing
+git commit --amend --no-edit # change/ammend the commit without editing the message
+
+### Git Content Exploration/Discovery
+git show <commit-id> # Shows changes added in that commit (diff between provided commit and previous commit)
+git log --follow -- filename # lists all commits that changed a specific file
+git show HEAD@{2013-02-25}:./fileInCurrentDirectory.txt # show what the file looked liked when HEAD was @date
+git show <commit-id>:<full/path/to/file> # show what the file was at that commit
+
+### Branches
+git checkout -b new-branch-name # create a new branch from current branch
+git push origin new-branch-name
+git push -d <remote_name> <branchname>   # Delete remote
+git branch -D <branchname>               # Delete local
+
+### Tags
+git tag 0.0.1
+git push --tags 
+git push origin <tag-name>
+git tag -d <tag-name> # delete local tag
+git push origin --delete <tag-name> # delete remote tag
+

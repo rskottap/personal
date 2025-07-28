@@ -1,0 +1,44 @@
+## Project Settings
+
+Project -> 'Project Settings'
+Settings Tab: Set custom project folder, resolution, fps.
+
+*Change $QT_SCALE_FACTOR if app display seems off*
+
+## Common Basics
+### Cut clip in Timeline position
+Shift + R
+
+### Select Zone
+I, O
+
+### Move to Zone start and end
+Shift + I/O
+
+### Slow-mo/Speed up
+- Right click -> change speed
+
+## Effects
+### Insert Effect
+
+- Select Effects tab (near Project Bin)
+- Search for effect
+- Drag and drop onto selected clip in timeline.
+
+### Text typewriter effect
+- Go to Project -> 'Add Title Clip' 
+- Type text in big title editor. Set font, size, colour etc.,
+- Select show background in bottom left to overlay. 
+- Select 'typewriter' effect
+- Set other properties like letter spacing, frame step and expansion mode.
+- Drag clip onto timeline.
+
+## Selecting clips
+- Shift + clip on clips, to select multiple clips at a time
+- Shift + select and drag, to select multiple clips stretched out on timeline. Useful if you want to select all the clips in a very long video. Zoom out and select.
+
+- Ctrl + G, group clips
+- Shift + Ctrl + G, ungroup clips
+
+- Timline -> 'Add Timline Selection to Library', adds the selection (along with clips, effects, position, tracks...everything) to project Library, next to Clip Monitor.
+

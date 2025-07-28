@@ -1,0 +1,64 @@
+## Uninstall any previous erroneous installations
+
+#### Check existing
+dpkg -l | grep -i nvidia
+dpkg -l | grep -i cuda
+dpkg -l | grep -i libcuda
+
+#### Remove all packages
+sudo apt-get purge 'nvidia-*' 'nvidia*' 'cuda-*' 'cuda*' 'libcuda*' 'libnvidia-compute-*' 'nsight-compute-*'
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo rm -rf /usr/local/cuda*
+sudo add-apt-repository --remove ppa:graphics-drivers/ppa
+sudo apt-get autoremove --purge
+sudo apt-get autoclean
+sudo apt-get update
+
+#### Regenerate inital RAM disk and reboot
+sudo update-initramfs -u
+sudo reboot
+
+#### Verify Cleanup
+dpkg -l | grep -i nvidia
+dpkg -l | grep -i cuda
+
+sudo apt-get install --reinstall xserver-xorg-video-nouveau
+
+#################################################################################
+
+## Install via apt
+sudo apt update
+sudo ubuntu-drivers autoinstall
+sudo apt install nvidia-cuda-toolkit
+### Add CUDA Paths to private bashrc
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+sudo reboot
+
+## Nvidia CUDA Installation
+### Instuctions Link: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/
+
+lspci | grep -i nvidia # Verify cuda capable gpu
+uname -m && cat /etc/*release  # Verify supported version of linux
+gcc --version # Verify gcc installed
+sudo apt-get install gcc # If not, install gcc
+
+### Download Nvidia Cuda Toolkit
+### Link: https://developer.nvidia.com/cuda-downloads
+### 
+### Choose your OS, Architecture, etc., and chose Deb (network) and follow instructions there.
+### ((Deb (network) is the preferred method for installing the toolkit, as it gives you access to all the packages in the CUDA repository.))
+
+### Toolkit Installer
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-6
+
+### Driver Installer
+sudo apt-get install -y cuda-drivers
+#sudo apt-get install -y nvidia-open 
+
+#### Reboot to work
+

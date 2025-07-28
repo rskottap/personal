@@ -1,0 +1,48 @@
+import argparse
+
+# Create the parser
+parser = argparse.ArgumentParser(description="A script demonstrating argparse features")
+
+# Positional argument (required, in specific order)
+parser.add_argument('filename', type=str, help="Input file name")
+
+# Optional argument with short and long forms
+parser.add_argument('-o', '--output', type=str, help="Output file name", default='output.txt')
+
+# Optional argument with multiple inputs
+parser.add_argument('--values', type=int, nargs=3, help="Provide exactly 3 integers")
+
+# Optional argument that is required
+parser.add_argument('-r', '--required', required=True, help="This argument is required")
+
+# Boolean flag (no value, just true/false)
+parser.add_argument('-v', '--verbose', action='store_true', help="Increase verbosity")
+
+# Optional argument with specific type (float)
+parser.add_argument('--scale', type=float, help="A floating-point number")
+
+# Optional argument that accepts a variable number of arguments
+parser.add_argument('--files', type=argparse.FileType('r'), nargs='*', help="Input files")
+
+def check_nonneg(value):
+    ivalue = int(value)
+    if ivalue < 0:
+        raise argparse.ArgumentTypeError(f"Threshold needs to be an integer greater than or equal to 0 (int n>=0). Passed {value}\n")
+    return ivalue
+
+parser.add_argument('--thresh', type=check_nonneg, help="Integer with check.")
+
+# Parse the arguments
+args = parser.parse_args()
+
+# Access the arguments
+print(f"Filename: {args.filename}")
+print(f"Output: {args.output}")
+print(f"Values: {args.values}")
+print(f"Required: {args.required}")
+print(f"Verbose: {args.verbose}")
+print(f"Scale: {args.scale}")
+if args.files:
+    for f in args.files:
+        print(f"File: {f.name}")
+

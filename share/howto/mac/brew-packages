@@ -1,0 +1,12 @@
+coreutils
+git
+gh
+gsed
+readline
+
+python@3.12
+
+bash-completion@2
+powerlevel10k
+zsh-autosuggestions
+zsh-fast-syntax-highlighting

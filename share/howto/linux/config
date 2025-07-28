@@ -1,0 +1,85 @@
+### Login Shells
+
+A login shell is the first shell session created after a user logs into the system. It is used when a user logs in directly, either via:
+
+- A terminal or console login (e.g., text-based login after booting).
+- Remote login via SSH.
+- Using su - (with the hyphen) to switch users.
+- Opening a TTY session (by pressing Ctrl + Alt + F1...F6).
+
+Behavior of a Login Shell:
+
+When you start a login shell, it reads and sources the following files:
+- System-wide configuration: `/etc/profile`
+- User-specific configuration: `~/.bash_profile`, `~/.bash_login`, or `~/.profile` (it sources the first one that exists and stops checking the others).
+
+Login shells are typically responsible for setting the global environment.
+
+`shopt -q login_shell` to check if login_shell
+
+### Non-login Shells
+
+A non-login shell is any shell that is started after logging in or as a subshell. This is commonly the case when you open a terminal in a graphical desktop environment like GNOME, KDE, etc. These shells are interactive but non-login.
+
+Examples of non-login shell scenarios include:
+
+- Opening a terminal emulator (like gnome-terminal, konsole, xterm) from the desktop environment.
+- Running a script from a running terminal or shell.
+- Starting a subshell (e.g., by running bash inside an already running shell).
+- Spawning a shell with commands like bash or sh without the --login flag.
+
+Behavior of a Non-login Shell:
+A non-login shell does not read ~/.bash_profile, ~/.bash_login, or /etc/profile files.
+Instead, it reads:
+- System-wide interactive shell configuration: `/etc/bash.bashrc` (if it exists).
+- User-specific interactive shell configuration: `~/.bashrc`.
+
+
+### Common configs
+
+- `/etc` has system wide configuration files
+- `/etc/profile` is the system-wide configuration for login shell 
+- `/etc/bash.bashrc` is the system-wide configuration for non-login interactive shells.
+- `/etc/bash_completion.d/` stores system-wide bash completion scripts
+
+### HOSTNAME 
+
+`echo $HOSTNAME`, `hostname` # shows current hostname
+`cat /etc/hostname` # also has hostname, change this file to overwrite system wide hostname
+`cat /proc/sys/kernel/hostname` # if exists
+
+The /proc file system acts as an interface to the kernel's internal data structures. It can be used to: obtain information about the system and change certain kernel parameters at runtime. 
+
+`hostnamectl set-hostname <new-hostname>` # change hostname
+`hostnamectl` to get host information
+
+### USERNAME
+
+Linux usernames are stored in the file `/etc/passwd`. Each line in this file contains information about a user, including: Their username, User ID number (UID), Home directory, and The login shell.
+
+`echo $USER` # shows current username
+`cat /etc/passwd` # shows all user info, with passwd replaced by x (encrypted)
+
+- usermod is the command to edit an existing user.
+`sudo usermod -l <newusername> <oldusername>` # change username
+`sudo usermod -d </newhome/username> <username>` # change user home directory
+
+### System Info
+
+#### OS and Architecture
+`cat /etc/os-release` # shows os and architecture details
+`uname -a`, `uname -m` # uname prints system information
+
+#### CPU/GPU
+`lscpu` # display information about the CPU architecture
+`cat /proc/cpuinfo`
+
+`cat /proc/meminfo` # Total memeory information
+
+#### Partitions
+`lsblk -f` # list block devices
+`lsblk -o NAME,SIZE,MOUNTPOINT,LABEL,FSAVAIL /dev/sda` 
+
+`sudo fdisk -l` # lists disk partition table. Manipulate global partition table
+
+**`sudo gparted`** # install, GUI for viewing partition info

@@ -1,0 +1,50 @@
+### Bash Prompt, Colours, Basics
+
+```
+end="\e[00m"
+
+bla="${end}\e[1;30m"
+
+_bla="\[$bla\]"
+```
+
+The \e[00m notation is an escape sequence used to control text formatting in the terminal, specifically to reset the terminal's text formatting (colors and styles) back to the default. Here's a breakdown of how it works:
+
+- `\e`: This is the escape character (ASCII code 27), usually written as \e or \033, which starts an escape sequence.
+- `[00m`: This specifies the reset formatting. The 00m means "reset all attributes," which removes any colors, boldness, or other text effects applied previously.
+In your script, the end="\e[00m" is used to return the terminal text to its default style, ensuring that any formatting applied earlier (like colored text) does not continue beyond where it's intended.
+
+---
+
+Let's break down how `bla="${end}\e[1;30m"` and `_bla="\[$bla\]"` work:
+
+### 1. `bla="${end}\e[1;30m"`
+- **`${end}`**: This variable refers to `"\e[00m"`, which resets text formatting to default. By placing `${end}` at the beginning of the color code, you ensure that any previous formatting is cleared before applying the new style.
+  
+- **`\e[1;30m`**: This is the escape sequence for setting bold black text:
+  - `\e`: The escape character, initiating the sequence.
+  - `[1`: The number `1` specifies bold text.
+  - `30m`: The `30` refers to the color black. (ANSI color codes use numbers from `30` to `37` for standard text colors, where `30` is black, `31` is red, etc.)
+
+So, this line creates a variable `bla` that resets the text formatting and then applies bold black text.
+
+### 2. `_bla="\[$bla\]"`
+- **`\[$bla\]`**: The `\[` and `\]` are special markers in Bash prompt variables (such as `PS1`). They tell Bash that the contents between `\[` and `\]` should not be counted as part of the prompt's length when calculating where to wrap lines in the terminal. Without these markers, the prompt would misbehave, with wrapping lines getting misplaced.
+
+So in this case:
+- `\[$bla\]` tells Bash to treat the content inside (the bold black color) as non-printable when it calculates the prompt's length, preventing issues with line wrapping in the terminal.
+
+In summary:
+- `bla="${end}\e[1;30m"` sets a variable for bold black text.
+- `_bla="\[$bla\]"` ensures that the prompt handles this color correctly without messing up terminal line wrapping.
+
+---
+
+### Explanation of \u, \h, \w, and \W in the PS1 export command:
+
+- `\u`: Displays the username of the current user.
+- `\h`: Displays the hostname (the name of the computer), up to the first dot.
+- `\w`: Shows the full path of the current working directory.
+- `\W`: Displays the basename (the last part) of the current working directory. 
+
+These escape sequences are automatically expanded by the shell when constructing the prompt. 

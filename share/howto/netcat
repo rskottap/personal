@@ -1,0 +1,17 @@
+### To serve file (on computer A):
+
+cat something.zip | nc -l -p 1234
+
+### To receive file (on computer B):
+
+netcat server.ip.here. 1234 > something.zip
+
+### OR
+
+### On your "sender client":
+cat something.zip | nc server.ip.here 1234
+
+### On your receiver server (A):
+
+netcat -l -p 1234 -q 1 > something.zip < /dev/null
+

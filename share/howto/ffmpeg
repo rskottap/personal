@@ -1,0 +1,31 @@
+### Get File Info
+ffprobe -i input-file.mp4
+ffprobe -i input-file.mp4 -show_streams -select_streams a:0
+
+### Convert
+ffmpeg -i input-file.mp4 converted-file.wav
+
+#### Convert audio format
+To 16-bit PCM
+`ffmpeg -i input-file.wav -acodec pcm_s16le -ar 44100 converted-output.wav`
+
+- `-acodec pcm_s16le`: Changes the audio codec to 16-bit PCM (signed little-endian).
+-`-ar 44100`: Sets the sample rate to 44.1 kHz, which is a standard rate for audio playback.
+
+To MP3:
+`ffmpeg -i musicgen_out.wav -acodec libmp3lame -b:a 192k converted_output.mp3`
+
+- `-acodec libmp3lame`: Uses the LAME MP3 encoder.
+- `-b:a 192k`: Sets the bitrate to 192 kbps.
+
+### Extract sections
+`ffmpeg -i input_file.mp4 -ss 00:01:30 -t 00:00:30 -c copy output.mp4`
+
+- `-i input_file.mp4`: Specifies the input video file
+- `-ss 00:01:30`: Sets the start time (1 minute and 30 seconds into the video)
+- `-t 00:00:30`: Sets the duration of the clip (30 seconds)
+- `-c copy`: Copies the streams without re-encoding (faster)
+- `output.mp4`: Name of the output file
+
+`ffmpeg -i input_file.mp4 -ss 00:01:30 -to 00:02:00 -c copy output.mp4`
+

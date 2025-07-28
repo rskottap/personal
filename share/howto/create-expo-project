@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# https://docs.expo.dev/get-started/set-up-your-environment/?platform=ios&device=physical&mode=development-build 
+# create a project
+npx create-expo-app@latest
+
+# install Expo Application Services cli
+npm install -g eas-cli
+
+eas login
+
+eas build:configure
+
+eas device:create # for ios only
+
+eas build --platform ios --profile development # or android
+
+# turn on developer mode and install development build on device for ios
+
+# start a development server
+npx expo start

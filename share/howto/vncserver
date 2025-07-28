@@ -1,0 +1,65 @@
+# Which desktop environment to use (ubuntu-desktop vs xfce4)
+# Which vncserver to use (tigervnc vs tightvnc)
+# Which terminal to use (xfce4, xterm, gnome-terminal)
+ 
+sudo apt update
+sudo apt install tightvncserver
+sudo apt install xfce4 xfce4-goodies
+
+# set passwd
+tightvncserver
+
+tightvncserver -kill :1
+
+# Edit the file ~/.vnc/xstartup to specify which desktop environment to use.
+# Add or modify these lines
+#!/bin/bash
+startxfce4 &
+
+#OR
+sudo apt update
+sudo apt install ubuntu-desktop tigervnc-standalone-server
+sudo apt install gnome-session gnome-terminal dbus-x11
+
+# start the vncserver and set a password, elsavnc
+vncserver
+
+# Kill the VNC Server (to reconfigure it):
+vncserver -kill :1
+
+# Edit the file ~/.vnc/xstartup to specify which desktop environment to use.
+# Add or modify these lines
+
+###########
+#!/bin/bash
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=GNOME
+export GNOME_SHELL_SESSION_MODE=ubuntu
+# Start GNOME session with debugging info
+gnome-session &> $HOME/.vnc/gnome-session.log &
+##########
+
+# Make the file executable
+chmod +x ~/.vnc/xstartup
+
+# Tunnel VNC over SSH: Forward the VNC port (5901 by default) using SSH:
+ssh -i path/to/your.pem -L 5901:localhost:5901 ubuntu@your-ec2-public-ip
+
+
+# Open the VNC client (like Remmina, TigerVNC Viewer) and connect to localhost:5901
+
+# Kill the VNC Server (to reconfigure it):
+vncserver -kill :1
+
+# To start the vncserver again:
+vncserver :1
+
+# DEBUG TRY 
+vncserver -xstartup /usr/bin/xterm
+#Disable gnome-initial-setup for the current user (prevents the initial setup from running automatically for new sessions):
+sudo rm /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
+#Remove the user-specific file if it exists
+rm ~/.config/autostart/gnome-initial-setup-first-login.desktop
+

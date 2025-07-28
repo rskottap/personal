@@ -1,0 +1,21 @@
+### find a setting
+dconf dump / | grep -C 5 "<term>"
+
+### read a setting
+dconf read /org/gnome/gnome-screenshot/auto-save-directory
+
+### set a key-value pair
+dconf write /org/cinnamon/desktop/wm/preferences/mouse-button-modifier "'<Super>'"
+
+dconf write /org/gnome/gnome-screenshot/auto-save-directory "'/home/ramya/Desktop/screenshots'"
+
+### using gsettings
+
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+
+gsetting set SCHEMA:PATH KEY VALUE
+
+gsettings get org.cinnamon.desktop.keybindings.wm show-desktop
+
+gsetting get <path-to-schema> KEY
+

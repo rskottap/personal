@@ -1,0 +1,14 @@
+## Basic commands
+
+### Download video
+yt-dlp <link>
+
+### View Formats
+yt-dlp -F <link>
+
+### Extract audio only
+yt-dlp --extract-audio <link>
+
+### Extract best video and audio (bv, ba) formats merge, download sections
+yt-dlp -f 'bv*[ext=mp4]+ba[ext=mp3]/b[ext=mp4]' --merge-output-format mp4 -o <output_path> --download-sections *<start>-<end> <link>
+
