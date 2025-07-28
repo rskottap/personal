@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This is arguably the paradigmatic minimal bash completion.
 _emoji() {

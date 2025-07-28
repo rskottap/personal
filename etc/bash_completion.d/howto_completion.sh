@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Bash completion function for the 'howto' command
 _howto_completions() {
