@@ -6,7 +6,7 @@ _howto_completions() {
   cur_word="${COMP_WORDS[COMP_CWORD]}"
 
   # Find all files and directories recursively in the howto folder
-  howto_files=$(find -L "$HOWTO" -type f -o -type d | sed "s|$HOWTO/||")
+  howto_files=$(find -L "$HOWTO/" -type f -o -type d | sed "s|$HOWTO/||")
 
   # Provide completion options based on current input
   COMPREPLY=($(compgen -W "$howto_files" -- "$cur_word"))
