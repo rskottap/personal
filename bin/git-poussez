@@ -1,4 +1,5 @@
 #!/bin/sh
 
-echo "gitting poussez..."
+echo "gitting poussez... ("
 git push $*
+echo "...) got poussez"
