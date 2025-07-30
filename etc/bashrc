@@ -12,9 +12,8 @@ export REPOS="${DESKTOP}/repos"
 export OBSIDIAN="${DESKTOP}/obsidian"
 export SCREENSHOTS="${DESKTOP}/screenshots"
 export DROPBOX="${DESKTOP}/Dropbox"
-
-
 export HOWTO="${PERSONAL}/share/howto"
+
 export PATH="$HOWTO:$PATH"
 
 if [ -e '/usr/local/cuda' ]; then export CUDA_HOME="/usr/local/cuda"; else export CUDA_HOME="/opt/cuda/"; fi
@@ -46,6 +45,10 @@ dirs+=(
     [personal/etc]="${PERSONAL}/etc"
 )
 
+for f in "${PERSONAL}"/etc/bash_completion.d/*; do
+    source "$f"
+done
+
 ## Aliases
 alias brcp="$EDITOR ${PERSONAL}/etc/bashrc && source ${PERSONAL}/etc/bashrc"
 
@@ -56,9 +59,7 @@ alias ipyembed='echo "__import__(\"IPython\").embed()" | xc'
 alias pca='pre-commit run --all-files'
 
 alias use_llava='export IMFIND_USE_LLAVA="True"'
-
-## Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/ramya/.lmstudio/bin"
+alias unuse_llava='unset IMFIND_USE_LLAVA'
 
 ## For lean
 export PATH="$HOME/.elan/bin:$PATH"
