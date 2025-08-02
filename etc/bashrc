@@ -29,6 +29,7 @@ export XMODIFIERS=@im=ibus
 
 ## My private dirs
 dirs+=(
+    [desktop]="$DESKTOP"
     [repos]="$REPOS"
     [obsidian]="$OBSIDIAN"
     [ss]="$SCREENSHOTS"
