@@ -7,3 +7,9 @@
 	autosetupremote = true
 [pull]
 	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/ramya/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/ramya/bin/gh auth git-credential
