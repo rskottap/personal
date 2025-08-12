@@ -16,10 +16,11 @@ export HOWTO="${PERSONAL}/share/howto"
 
 export PATH="$HOWTO:$PATH"
 
-if [ -e '/usr/local/cuda' ]; then export CUDA_HOME="/usr/local/cuda"; else export CUDA_HOME="/opt/cuda/"; fi
-export PATH="$PATH:$CUDA_HOME/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"
-
+if [ -e '/usr/local/cuda' ]; then export CUDA_HOME="/usr/local/cuda"; else export CUDA_HOME="/opt/cuda"; fi
+if [ -e "$CUDA_HOME" ]; then
+    export PATH="$PATH:$CUDA_HOME/bin"
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"
+fi
 
 ### Ibus
 export GTK_IM_MODULE=ibus
