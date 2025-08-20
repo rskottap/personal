@@ -53,6 +53,7 @@ done
 
 ## Aliases
 alias brcp="$EDITOR ${PERSONAL}/etc/bashrc && source ${PERSONAL}/etc/bashrc"
+alias nrc="c nixos && $EDITOR -p base/base.nix"
 
 alias yta='yt-dlp --extract-audio'
 alias yt='yt-dlp'
