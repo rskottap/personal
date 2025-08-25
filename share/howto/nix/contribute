@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Git
+
+## Create a branch in your fork and rebase that branch in upstream/master
+git remote add upstream https://github.com/NixOS/nixpkgs.git
+git fetch upstream
+
+git checkout -b your-branch
+git rebase upstream/master
+
+# fix any conflicting files
+git add <files>
+git rebase --continue
+
+git push origin your-branch #--force?
+
+# Local Testing for new packages
+
+## Build and install locally
+nix-build -A python3Packages.mmry
+## Get a nix shell and test imports inside shell
+nix-shell -p python3Packages.mmry
+## run tests
+nix-build -A python3Packages.mmry.check
+
+# Simulating Hydra CI
+nixpkgs-review wip # drops you into a nix-shell
+## Inside the shell
+python -c "import mmry; print(mmry.__version__)"
+pytest -q
