@@ -40,6 +40,7 @@ dirs+=(
     [airoot]="$REPOS/airoot"
     [shortcuts]="$REPOS/shortcuts"
     [nixos]="$REPOS/nixos"
+    [nixpkgs]="$REPOS/nixpkgs"
     [hm]="$REPOS/home-manager"
     [personal]="${PERSONAL}"
     [personal/bin]="${PERSONAL}/bin"
