@@ -18,11 +18,11 @@ git push origin your-branch #--force?
 # Local Testing for new packages
 
 ## Build and install locally
-nix-build -A python3Packages.mmry
+nix build .#python3Packages.mmry
 ## Get a nix shell and test imports inside shell
-nix-shell -p python3Packages.mmry
+nix-shell -I nixpkgs=. -p python3Packages.mmry
 ## run tests
-nix-build -A python3Packages.mmry.check
+nix build .#python3Packages.mmry.check
 
 # Simulating Hydra CI
 nixpkgs-review wip # drops you into a nix-shell
