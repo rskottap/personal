@@ -65,6 +65,8 @@ alias pca='pre-commit run --all-files'
 alias use_llava='export IMFIND_USE_LLAVA="True"'
 alias unuse_llava='unset IMFIND_USE_LLAVA'
 
+alias py='ipython'
+
 ## For lean
 export PATH="$HOME/.elan/bin:$PATH"
 
