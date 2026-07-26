@@ -29,9 +29,14 @@ conky.config = {
     use_xft = true,
     font = 'DejaVu Sans:size=10',
     xftalpha = 1,
-    default_color = 'FFFFFF',
-    color1 = 'AAAAAA',
-    color2 = 'FFFFFF',
+    default_color = 'E6E6E6',
+    color1 = '9AA0A6', -- secondary text and dividers
+    color2 = 'EF5350', -- CPU and download
+    color3 = '81C784', -- battery
+    color4 = 'BA68C8', -- memory
+    color5 = 'FFB74D', -- disk
+    color6 = 'F06292', -- upload
+    color7 = '64B5F6', -- section headings
 
     draw_shades = false,
     draw_outline = false,
@@ -44,40 +49,37 @@ conky.config = {
 };
 
 conky.text = [[
-${font DejaVu Sans:light:size=36}${alignr}${time %H:%M}${font}
-${color1}${alignr}${time %A, %B %d}${color}
-
-${font DejaVu Sans:bold:size=11}SYSTEM${font}
+${color7}${font DejaVu Sans:bold:size=11}SYSTEM${font}
 ${color1}${hr 2}${color}
 
-Battery ${alignr}${battery_percent}%
-${battery_bar 6}
+Battery ${alignr}${color3}${battery_percent}%${color}
+${color3}${battery_bar 6}${color}
 
-CPU ${alignr}${cpu}%
-${cpugraph 35,320}
+CPU ${alignr}${color2}${cpu}%${color}
+${cpugraph 35,320 263238 EF5350}
 
-RAM ${alignr}${mem} / ${memmax}
-${membar 6}
+RAM ${alignr}${color4}${mem} / ${memmax}${color}
+${color4}${membar 6}${color}
 
-Disk ${alignr}${fs_used /} / ${fs_size /}
-${fs_bar 6 /}
+Disk ${alignr}${color5}${fs_used /} / ${fs_size /}${color}
+${color5}${fs_bar 6 /}${color}
 
-${font DejaVu Sans:bold:size=11}NETWORK${font}
+${color7}${font DejaVu Sans:bold:size=11}NETWORK${font}
 ${color1}${hr 2}${color}
 
-Download ${alignr}${downspeed wlp0s20f3}
-${downspeedgraph wlp0s20f3 28,320}
+Download ${alignr}${color2}${downspeed wlp0s20f3}${color}
+${downspeedgraph wlp0s20f3 28,320 263238 EF5350}
 
-Upload ${alignr}${upspeed wlp0s20f3}
-${upspeedgraph wlp0s20f3 28,320}
+Upload ${alignr}${color6}${upspeed wlp0s20f3}${color}
+${upspeedgraph wlp0s20f3 28,320 263238 F06292}
 
-${font DejaVu Sans:bold:size=11}TOP PROCESSES${font}
+${color7}${font DejaVu Sans:bold:size=11}TOP PROCESSES${font}
 ${color1}${hr 2}${color}
 
 ${color1}COMMAND${alignr}CPU    RAM${color}
-${top name 1}${alignr}${top cpu 1}%  ${top mem 1}%
-${top name 2}${alignr}${top cpu 2}%  ${top mem 2}%
-${top name 3}${alignr}${top cpu 3}%  ${top mem 3}%
-${top name 4}${alignr}${top cpu 4}%  ${top mem 4}%
-${top name 5}${alignr}${top cpu 5}%  ${top mem 5}%
+${top name 1}${alignr}${color2}${top cpu 1}%  ${color4}${top mem 1}%${color}
+${top name 2}${alignr}${color2}${top cpu 2}%  ${color4}${top mem 2}%${color}
+${top name 3}${alignr}${color2}${top cpu 3}%  ${color4}${top mem 3}%${color}
+${top name 4}${alignr}${color2}${top cpu 4}%  ${color4}${top mem 4}%${color}
+${top name 5}${alignr}${color2}${top cpu 5}%  ${color4}${top mem 5}%${color}
 ]];
