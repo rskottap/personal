@@ -2,7 +2,8 @@ conky.config = {
     -- General
     update_interval = 1,
     total_run_times = 0,
-    background = true,
+    -- systemd owns the process; do not fork away from the user service.
+    background = false,
     double_buffer = true,
     no_buffers = true,
     cpu_avg_samples = 2,
@@ -11,7 +12,9 @@ conky.config = {
     -- Window
     own_window = true,
     own_window_class = 'Conky',
-    own_window_type = 'normal',
+    -- Keep Conky on Cinnamon's desktop layer instead of treating it as a
+    -- normal application tied to the current workspace/window.
+    own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 0,
