@@ -47,6 +47,7 @@ dirs+=(
     [personal/lib]="${PERSONAL}/lib"
     [personal/etc]="${PERSONAL}/etc"
     [ghx]="$DESKTOP/ghx"
+    [wtn]="$REPOS/we-the-nameless"
 )
 
 for f in "${PERSONAL}"/etc/bash_completion.d/*; do
