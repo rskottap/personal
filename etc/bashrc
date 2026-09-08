@@ -46,13 +46,15 @@ dirs+=(
     [personal/bin]="${PERSONAL}/bin"
     [personal/lib]="${PERSONAL}/lib"
     [personal/etc]="${PERSONAL}/etc"
-    [ghx]="$DESKTOP/ghx"
     [wtn]="$REPOS/we-the-nameless"
+    [ghx]="$REPOS/ghx"
 )
 
 for f in "${PERSONAL}"/etc/bash_completion.d/*; do
     source "$f"
 done
+source "$REPOS/ghx/lib/bash/completions/gemini.sh"
+source "$REPOS/ghx/lib/bash/completions/ghxopt.sh"
 
 ## Aliases
 alias brcp="$EDITOR ${PERSONAL}/etc/bashrc && source ${PERSONAL}/etc/bashrc"
