@@ -70,11 +70,11 @@ ${color5}${fs_bar 6 /}${color}
 ${color7}${font DejaVu Sans:bold:size=11}NETWORK${font}
 ${color1}${hr 2}${color}
 
-Download ${alignr}${color2}${downspeed wlp0s20f3}${color}
-${downspeedgraph wlp0s20f3 28,320 263238 EF5350}
+Download ${alignr}${color2}${downspeed wlo1}${color}
+${downspeedgraph wlo1 28,320 263238 EF5350}
 
-Upload ${alignr}${color6}${upspeed wlp0s20f3}${color}
-${upspeedgraph wlp0s20f3 28,320 263238 F06292}
+Upload ${alignr}${color6}${upspeed wlo1}${color}
+${upspeedgraph wlo1 28,320 263238 F06292}
 
 ${color7}${font DejaVu Sans:bold:size=11}TOP PROCESSES${font}
 ${color1}${hr 2}${color}
